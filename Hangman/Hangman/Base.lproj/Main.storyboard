@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--initView-->
@@ -57,7 +58,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7n9-8w-e5L">
-                                <rect key="frame" x="180" y="40" width="240" height="253"/>
+                                <rect key="frame" x="180" y="52" width="240" height="253"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Blanks of Answer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnU-df-QPN">
                                 <rect key="frame" x="234" y="334" width="132" height="21"/>
@@ -65,35 +66,49 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XdP-f1-HU6">
-                                <rect key="frame" x="180" y="399" width="240" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="List of Wrong Guesses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Phu-jQ-FUx">
-                                <rect key="frame" x="57" y="517" width="473" height="21"/>
+                                <rect key="frame" x="57" y="565" width="473" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOh-rl-UAa">
-                                <rect key="frame" x="279" y="452" width="43" height="30"/>
+                                <rect key="frame" x="239" y="517" width="108" height="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Guess"/>
                                 <connections>
                                     <action selector="guessButton:" destination="ass-eb-qNC" eventType="touchUpInside" id="9df-m8-Cty"/>
                                 </connections>
                             </button>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mXj-I5-ENp">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Hangman" id="SgP-jT-VVT">
+                                        <barButtonItem key="leftBarButtonItem" title="Start Over" id="4io-o6-lGY">
+                                            <connections>
+                                                <action selector="startOverButton:" destination="ass-eb-qNC" id="PEJ-8W-1v7"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <pickerView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oPO-N3-4b5">
+                                <rect key="frame" x="259" y="363" width="68" height="146"/>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="mXj-I5-ENp" secondAttribute="trailing" constant="-20" id="00R-G0-fcs"/>
                             <constraint firstItem="fnU-df-QPN" firstAttribute="centerX" secondItem="iJD-FF-FKH" secondAttribute="centerX" id="4nh-Le-CSA"/>
-                            <constraint firstItem="XdP-f1-HU6" firstAttribute="top" secondItem="fnU-df-QPN" secondAttribute="bottom" constant="44" id="SZx-4q-jt7"/>
+                            <constraint firstItem="oPO-N3-4b5" firstAttribute="centerX" secondItem="iJD-FF-FKH" secondAttribute="centerX" id="5U5-TE-63G"/>
+                            <constraint firstItem="SOh-rl-UAa" firstAttribute="top" secondItem="oPO-N3-4b5" secondAttribute="bottom" constant="8" id="7eL-ZU-J5l"/>
+                            <constraint firstItem="SOh-rl-UAa" firstAttribute="centerX" secondItem="iJD-FF-FKH" secondAttribute="centerX" id="ADO-Xg-04a"/>
+                            <constraint firstItem="mXj-I5-ENp" firstAttribute="leading" secondItem="iJD-FF-FKH" secondAttribute="leadingMargin" constant="-20" id="AjT-IK-4SH"/>
                             <constraint firstItem="7n9-8w-e5L" firstAttribute="centerX" secondItem="iJD-FF-FKH" secondAttribute="centerX" id="UST-h0-mL8"/>
-                            <constraint firstItem="Phu-jQ-FUx" firstAttribute="top" secondItem="SOh-rl-UAa" secondAttribute="bottom" constant="35" id="ZoA-jr-89g"/>
+                            <constraint firstItem="Phu-jQ-FUx" firstAttribute="top" secondItem="SOh-rl-UAa" secondAttribute="bottom" constant="8" id="fkd-Va-PQV"/>
+                            <constraint firstItem="oPO-N3-4b5" firstAttribute="top" secondItem="fnU-df-QPN" secondAttribute="bottom" constant="8" id="jsU-s8-lC2"/>
                             <constraint firstItem="fnU-df-QPN" firstAttribute="top" secondItem="7n9-8w-e5L" secondAttribute="bottom" constant="41" id="kYw-6Z-wgS"/>
-                            <constraint firstItem="XdP-f1-HU6" firstAttribute="centerX" secondItem="iJD-FF-FKH" secondAttribute="centerX" id="l6Y-Hm-TCP"/>
-                            <constraint firstItem="SOh-rl-UAa" firstAttribute="centerX" secondItem="iJD-FF-FKH" secondAttribute="centerX" id="vXb-l5-P1h"/>
-                            <constraint firstItem="SOh-rl-UAa" firstAttribute="top" secondItem="XdP-f1-HU6" secondAttribute="bottom" constant="23" id="wob-2r-GwT"/>
+                            <constraint firstItem="mXj-I5-ENp" firstAttribute="top" secondItem="iJD-FF-FKH" secondAttribute="topMargin" id="pAY-fM-B1m"/>
                         </constraints>
                     </view>
                     <connections>
@@ -101,7 +116,7 @@
                         <outlet property="gameView" destination="iJD-FF-FKH" id="2cG-ur-1AO"/>
                         <outlet property="imageView" destination="7n9-8w-e5L" id="mJI-OK-dTz"/>
                         <outlet property="listOfWrongGuesses" destination="Phu-jQ-FUx" id="wVm-5k-T1b"/>
-                        <outlet property="userGuess" destination="XdP-f1-HU6" id="2bu-gm-zMM"/>
+                        <outlet property="userGuess" destination="oPO-N3-4b5" id="hHx-w0-Ke7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U2x-QA-ebV" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		39C114CC1C9633E500C11E63 /* you-lose.gif in Resources */ = {isa = PBXBuildFile; fileRef = 39C114CA1C9633E500C11E63 /* you-lose.gif */; };
-		39C114CD1C9633E500C11E63 /* you-win.gif in Resources */ = {isa = PBXBuildFile; fileRef = 39C114CB1C9633E500C11E63 /* you-win.gif */; };
 		EC93104C1C891F2C00BE736C /* hangman1.gif in Resources */ = {isa = PBXBuildFile; fileRef = EC9310451C891F2C00BE736C /* hangman1.gif */; };
 		EC93104D1C891F2C00BE736C /* hangman2.gif in Resources */ = {isa = PBXBuildFile; fileRef = EC9310461C891F2C00BE736C /* hangman2.gif */; };
 		EC93104E1C891F2C00BE736C /* hangman3.gif in Resources */ = {isa = PBXBuildFile; fileRef = EC9310471C891F2C00BE736C /* hangman3.gif */; };
@@ -46,8 +44,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		39C114CA1C9633E500C11E63 /* you-lose.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "you-lose.gif"; path = "basic-hangman-img/you-lose.gif"; sourceTree = "<group>"; };
-		39C114CB1C9633E500C11E63 /* you-win.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "you-win.gif"; path = "basic-hangman-img/you-win.gif"; sourceTree = "<group>"; };
 		EC9310451C891F2C00BE736C /* hangman1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = hangman1.gif; path = "basic-hangman-img/hangman1.gif"; sourceTree = "<group>"; };
 		EC9310461C891F2C00BE736C /* hangman2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = hangman2.gif; path = "basic-hangman-img/hangman2.gif"; sourceTree = "<group>"; };
 		EC9310471C891F2C00BE736C /* hangman3.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = hangman3.gif; path = "basic-hangman-img/hangman3.gif"; sourceTree = "<group>"; };
@@ -108,8 +104,6 @@
 				EC9310491C891F2C00BE736C /* hangman5.gif */,
 				EC93104A1C891F2C00BE736C /* hangman6.gif */,
 				EC93104B1C891F2C00BE736C /* hangman7.gif */,
-				39C114CA1C9633E500C11E63 /* you-lose.gif */,
-				39C114CB1C9633E500C11E63 /* you-win.gif */,
 			);
 			name = "basic-hangman-img";
 			sourceTree = "<group>";
@@ -299,11 +293,9 @@
 			files = (
 				ECC22F7C1C891A6700749E58 /* phrases.plist in Resources */,
 				EC93104E1C891F2C00BE736C /* hangman3.gif in Resources */,
-				39C114CD1C9633E500C11E63 /* you-win.gif in Resources */,
 				ECC22F4D1C89177600749E58 /* LaunchScreen.storyboard in Resources */,
 				EC93104D1C891F2C00BE736C /* hangman2.gif in Resources */,
 				EC9310511C891F2C00BE736C /* hangman6.gif in Resources */,
-				39C114CC1C9633E500C11E63 /* you-lose.gif in Resources */,
 				ECC22F4A1C89177600749E58 /* Assets.xcassets in Resources */,
 				EC9310521C891F2C00BE736C /* hangman7.gif in Resources */,
 				ECC22F481C89177600749E58 /* Main.storyboard in Resources */,

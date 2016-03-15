@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, UIPickerViewDataSource,UIPickerViewDelegate {
 
     var globalPhrase:[String] = []
     var blanksOfAnswerArray:[String] = []
@@ -16,12 +16,24 @@ class GameViewController: UIViewController {
     var wrongGuesses:[String] = []
     var counter = 1
     
+    var userGuessText = ""
+    
     @IBOutlet var gameView: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var blanksOfAnswer: UILabel!
-    @IBOutlet weak var userGuess: UITextField!
-    
+    @IBOutlet weak var userGuess: UIPickerView!
     @IBOutlet weak var listOfWrongGuesses: UILabel!
+    
+    var wrongAlertController = UIAlertController(
+        title: "You Seriously Didn't Know This?!?",
+        message: "Gosh",
+        preferredStyle: .Alert)
+    
+    var correctAlertController = UIAlertController(
+        title: "Congratulations!",
+        message: "Congratulations! Congratulations! Congratulations! Congratulations!",
+        preferredStyle: .Alert)
+    
     
     func isGuessInPhrase(guess: String, phrase: [String]) -> Bool {
         for letter in phrase {
@@ -32,48 +44,103 @@ class GameViewController: UIViewController {
         return false
     }
     
+//    func countSpaces(globalPhrase: String) -> Int {
+//        var spaces = 0
+//        for letter in globalPhrase.characters {
+//            if letter == " " {
+//                spaces++
+//            }
+//        }
+//        return spaces
+//    }
+//    
+
+    
     @IBAction func guessButton(sender: AnyObject) {
-        if isGuessInPhrase(userGuess.text!, phrase: globalPhrase) {
+        if isGuessInPhrase(userGuessText, phrase: globalPhrase) {
             correctGuess()
         } else {
-            wrongGuess()
+            if userGuessText == "" || userGuessText == " " {
+                blanksOfAnswer.text = "Pick a Letter"
+            } else {
+                wrongGuess()
+            }
         }
-        userGuess.text = ""
+        
+        if userGuessText == " " || userGuessText == "" {
+            blanksOfAnswer.text = "Pick A Letter"
+        }
+        userGuessText = ""
     }
     
-
     func correctGuess() {
         var indexToChange = 0
-        if blanksOfAnswerArray.count == 1 {
-            imageView.image = UIImage(named: "you-win.gif")
-        } else {
+        
+        func isComplete() -> Bool {
             for var i = 0; i < globalPhrase.count; i++ {
-                if globalPhrase[i].lowercaseString == userGuess.text?.lowercaseString {
-                    globalPhrase[i] = "_"
-                    indexToChange = i
-                    break
+                if globalPhrase[i] != " " && globalPhrase[i] != "*" {
+                    return false
                 }
             }
-            //Insert that userGuess at that index into blanksOfAnswer
-            blanksOfAnswerArray.removeAtIndex(indexToChange)
-            blanksOfAnswerArray.insert(userGuess.text!, atIndex: indexToChange)
+            return true
         }
+
+        for var i = 0; i < globalPhrase.count; i++ {
+            if globalPhrase[i].lowercaseString == userGuessText.lowercaseString {
+                globalPhrase[i] = "*"
+                indexToChange = i
+                break
+            }
+        }
+        
+        if isComplete() == true {
+            self.presentViewController(correctAlertController, animated: true, completion: nil)
+        }
+        
+        blanksOfAnswerArray.removeAtIndex(indexToChange)
+        blanksOfAnswerArray.insert(userGuessText, atIndex: indexToChange)
+        
         blanksOfAnswer.text = blanksOfAnswerArray.joinWithSeparator("  ")
         
+        print(globalPhrase)
+        print(blanksOfAnswerArray)
     }
     
     func wrongGuess() {
         counter++
-        if counter < 7 {
+        if counter <= 7 {
             imageView.image = UIImage(named: "hangman\(counter).gif")
         }
-        else {
-            imageView.image = UIImage(named: "you-lose.gif")
+        if counter == 7 {
+            self.presentViewController(wrongAlertController, animated: true, completion: nil)
         }
+        wrongGuesses.append(userGuessText)
         listOfWrongGuesses.text = String(wrongGuesses)
     }
-
     
+    @IBAction func startOverButton(sender: AnyObject) {
+        resetProgress()
+    }
+    
+    func resetProgress() {
+        globalPhrase = []
+        blanksOfAnswerArray = []
+        wrongGuesses = []
+        counter = 1
+        
+        wrongAlertController = UIAlertController(
+            title:
+            "You Seriously Didn't Know This?!?",
+            message: "Gosh",
+            preferredStyle: .Alert)
+        
+        correctAlertController = UIAlertController(
+            title: "Congratulations!",
+            message: "Congratulations! Congratulations! Congratulations! Congratulations!",
+            preferredStyle: .Alert)
+        
+        self.viewDidLoad()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,18 +154,57 @@ class GameViewController: UIViewController {
         imageView.image = UIImage(named: "hangman1.gif")
         for char in phrase.characters {
             let ch = String(char)
-            globalPhrase.append(ch)
-        }
-        for var i = 0; i <= phrase.characters.count; i++ {
-            blanksOfAnswerArray.append("_")
+            globalPhrase.append(ch)        }
+        for var i = 0; i < phrase.characters.count; i++ {
+            if globalPhrase[i] == " " {
+                blanksOfAnswerArray.append(" ")
+            }
+            else {
+                blanksOfAnswerArray.append("_")
+            }
         }
         blanksOfAnswer.text = blanksOfAnswerArray.joinWithSeparator("  ")
         
+        wrongAlertController.addAction(UIAlertAction(title: "New Game", style:
+            .Default) { (action) in
+                self.resetProgress()
+            }
+        )
+        
+        correctAlertController.addAction(UIAlertAction(title: "New Game", style:
+            .Default) { (action) in
+                self.resetProgress()
+            }
+        )
+
+        userGuess.dataSource = self
+        userGuess.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    let pickerData = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+    
+    //MARK: - Delegates and data sources
+    //MARK: Data Sources
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    //MARK: Delegates
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerData[row]
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        userGuessText = pickerData[row]
     }
     
 
