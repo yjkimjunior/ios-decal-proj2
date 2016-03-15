@@ -10,13 +10,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Hangman/GameViewController.swift"
-            timestampString = "479347865.147974"
+            timestampString = "479684999.246993"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "guessButton(_:)"
-            landmarkType = "5">
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "GameViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Hangman/GameViewController.swift"
-            timestampString = "479348296.983386"
+            timestampString = "479708497.625766"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "correctGuess()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -9,18 +9,17 @@
 import UIKit
 
 class GameViewController: UIViewController {
-    var wrongGuesses:[String] = []
-    var correctGuesses:[String] = []
-    var blanksOfAnswerArray:[String] = []
+
     var globalPhrase:[String] = []
+    var blanksOfAnswerArray:[String] = []
+    
+    var wrongGuesses:[String] = []
     var counter = 1
     
+    @IBOutlet var gameView: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var blanksOfAnswer: UILabel!
     @IBOutlet weak var userGuess: UITextField!
-   
-    @IBOutlet weak var wrongGuess: UIButton!
-    @IBOutlet weak var correctGuess: UIButton!
     
     @IBOutlet weak var listOfWrongGuesses: UILabel!
     
@@ -35,55 +34,57 @@ class GameViewController: UIViewController {
     
     @IBAction func guessButton(sender: AnyObject) {
         if isGuessInPhrase(userGuess.text!, phrase: globalPhrase) {
-            correctGuesses.append(userGuess.text!)
-            correctGuess.hidden = false
+            correctGuess()
         } else {
-            wrongGuesses.append(String(userGuess.text!))
-            wrongGuess.hidden = false
+            wrongGuess()
         }
         userGuess.text = ""
     }
     
-    //pressed wrong! button
-    @IBAction func wrongGuess(sender: AnyObject) {
+
+    func correctGuess() {
+        var indexToChange = 0
+        if blanksOfAnswerArray.count == 1 {
+            imageView.image = UIImage(named: "you-win.gif")
+        } else {
+            for var i = 0; i < globalPhrase.count; i++ {
+                if globalPhrase[i].lowercaseString == userGuess.text?.lowercaseString {
+                    globalPhrase[i] = "_"
+                    indexToChange = i
+                    break
+                }
+            }
+            //Insert that userGuess at that index into blanksOfAnswer
+            blanksOfAnswerArray.removeAtIndex(indexToChange)
+            blanksOfAnswerArray.insert(userGuess.text!, atIndex: indexToChange)
+        }
+        blanksOfAnswer.text = blanksOfAnswerArray.joinWithSeparator("  ")
+        
+    }
+    
+    func wrongGuess() {
         counter++
-        if counter <= 7 {
+        if counter < 7 {
             imageView.image = UIImage(named: "hangman\(counter).gif")
         }
         else {
             imageView.image = UIImage(named: "you-lose.gif")
         }
-        
-        
         listOfWrongGuesses.text = String(wrongGuesses)
-        wrongGuess.hidden = true
     }
 
-    @IBAction func correctGuess(sender: AnyObject) {
-        //For Now: Just remove one blank
-        if blanksOfAnswerArray.count == 0 {
-            imageView.image = UIImage(named: "you-win.gif")
-        } else {
-            blanksOfAnswerArray.removeAtIndex(0)
-        }
-        blanksOfAnswer.text = blanksOfAnswerArray.joinWithSeparator("  ")
-        correctGuess.hidden = true
-    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        wrongGuess.hidden = true
-        correctGuess.hidden = true
-        
-//        if userGuess.text!.characters.count != 1 {
-//            print("wtf man")
-//        }
+
         listOfWrongGuesses.text = wrongGuesses.joinWithSeparator(", ")
         let hangmanPhrases = HangmanPhrases()
         let phrase = hangmanPhrases.getRandomPhrase()
         print(phrase)
+        imageView.image = UIImage(named: "hangman1.gif")
         for char in phrase.characters {
             let ch = String(char)
             globalPhrase.append(ch)
