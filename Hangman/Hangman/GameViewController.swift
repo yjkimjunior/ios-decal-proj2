@@ -34,6 +34,10 @@ class GameViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         message: "Congratulations! Congratulations! Congratulations! Congratulations!",
         preferredStyle: .Alert)
     
+    var repeatWrongGuessAlertController = UIAlertController(
+        title: "You Already Guessed This",
+        message: "You ALREADY Got This Wrong",
+        preferredStyle: .Alert)
     
     func isGuessInPhrase(guess: String, phrase: [String]) -> Bool {
         for letter in phrase {
@@ -63,7 +67,17 @@ class GameViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             if userGuessText == "" || userGuessText == " " {
                 blanksOfAnswer.text = "Pick a Letter"
             } else {
-                wrongGuess()
+                var alreadyGuessed = false
+                for var i = 0; i < wrongGuesses.count; i++ {
+                    if wrongGuesses[i] == userGuessText {
+                        self.presentViewController(repeatWrongGuessAlertController, animated: true, completion: nil)
+                        alreadyGuessed = true
+                        break
+                    }
+                }
+                if alreadyGuessed == false {
+                    wrongGuess()
+                }
             }
         }
         
@@ -89,16 +103,14 @@ class GameViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             if globalPhrase[i].lowercaseString == userGuessText.lowercaseString {
                 globalPhrase[i] = "*"
                 indexToChange = i
-                break
+                blanksOfAnswerArray.removeAtIndex(indexToChange)
+                blanksOfAnswerArray.insert(userGuessText, atIndex: indexToChange)
             }
         }
         
         if isComplete() == true {
             self.presentViewController(correctAlertController, animated: true, completion: nil)
         }
-        
-        blanksOfAnswerArray.removeAtIndex(indexToChange)
-        blanksOfAnswerArray.insert(userGuessText, atIndex: indexToChange)
         
         blanksOfAnswer.text = blanksOfAnswerArray.joinWithSeparator("  ")
         
@@ -175,6 +187,9 @@ class GameViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             .Default) { (action) in
                 self.resetProgress()
             }
+        )
+        
+        repeatWrongGuessAlertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil)
         )
 
         userGuess.dataSource = self
