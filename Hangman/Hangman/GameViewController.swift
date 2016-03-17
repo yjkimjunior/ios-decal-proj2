@@ -23,6 +23,8 @@ class GameViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
     @IBOutlet weak var blanksOfAnswer: UILabel!
     @IBOutlet weak var userGuess: UIPickerView!
     @IBOutlet weak var listOfWrongGuesses: UILabel!
+    @IBOutlet weak var guessesRemaining: UILabel!
+
     
     var wrongAlertController = UIAlertController(
         title: "You Seriously Didn't Know This?!?",
@@ -84,6 +86,7 @@ class GameViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         if userGuessText == " " || userGuessText == "" {
             blanksOfAnswer.text = "Pick A Letter"
         }
+        
         userGuessText = ""
     }
     
@@ -124,10 +127,13 @@ class GameViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             imageView.image = UIImage(named: "hangman\(counter).gif")
         }
         if counter == 7 {
+            blanksOfAnswerArray = globalPhrase
+            blanksOfAnswer.text = String(blanksOfAnswerArray)
             self.presentViewController(wrongAlertController, animated: true, completion: nil)
         }
         wrongGuesses.append(userGuessText)
         listOfWrongGuesses.text = String(wrongGuesses)
+        guessesRemaining.text = String(Int(guessesRemaining.text!)! - 1)
     }
     
     @IBAction func startOverButton(sender: AnyObject) {
@@ -151,6 +157,11 @@ class GameViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
             message: "Congratulations! Congratulations! Congratulations! Congratulations!",
             preferredStyle: .Alert)
         
+        repeatWrongGuessAlertController = UIAlertController(
+            title: "You Already Guessed This",
+            message: "You ALREADY Got This Wrong",
+            preferredStyle: .Alert)
+        
         self.viewDidLoad()
     }
     
@@ -160,6 +171,7 @@ class GameViewController: UIViewController, UIPickerViewDataSource,UIPickerViewD
         // Do any additional setup after loading the view.
 
         listOfWrongGuesses.text = wrongGuesses.joinWithSeparator(", ")
+        guessesRemaining.text = "7"
         let hangmanPhrases = HangmanPhrases()
         let phrase = hangmanPhrases.getRandomPhrase()
         print(phrase)

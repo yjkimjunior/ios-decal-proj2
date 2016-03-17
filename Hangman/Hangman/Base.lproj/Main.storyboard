@@ -67,7 +67,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="List of Wrong Guesses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Phu-jQ-FUx">
-                                <rect key="frame" x="57" y="565" width="473" height="21"/>
+                                <rect key="frame" x="57" y="565" width="237" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -95,25 +95,42 @@
                             <pickerView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oPO-N3-4b5">
                                 <rect key="frame" x="259" y="363" width="68" height="146"/>
                             </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Remaining:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcv-tx-97b">
+                                <rect key="frame" x="335" y="559" width="85" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="guessesRemaining" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I2c-uo-Wu3">
+                                <rect key="frame" x="436" y="559" width="144" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="mXj-I5-ENp" secondAttribute="trailing" constant="-20" id="00R-G0-fcs"/>
+                            <constraint firstItem="I2c-uo-Wu3" firstAttribute="trailing" secondItem="iJD-FF-FKH" secondAttribute="trailingMargin" id="2At-1g-VJw"/>
                             <constraint firstItem="fnU-df-QPN" firstAttribute="centerX" secondItem="iJD-FF-FKH" secondAttribute="centerX" id="4nh-Le-CSA"/>
                             <constraint firstItem="oPO-N3-4b5" firstAttribute="centerX" secondItem="iJD-FF-FKH" secondAttribute="centerX" id="5U5-TE-63G"/>
                             <constraint firstItem="SOh-rl-UAa" firstAttribute="top" secondItem="oPO-N3-4b5" secondAttribute="bottom" constant="8" id="7eL-ZU-J5l"/>
                             <constraint firstItem="SOh-rl-UAa" firstAttribute="centerX" secondItem="iJD-FF-FKH" secondAttribute="centerX" id="ADO-Xg-04a"/>
                             <constraint firstItem="mXj-I5-ENp" firstAttribute="leading" secondItem="iJD-FF-FKH" secondAttribute="leadingMargin" constant="-20" id="AjT-IK-4SH"/>
+                            <constraint firstItem="I2c-uo-Wu3" firstAttribute="leading" secondItem="gcv-tx-97b" secondAttribute="trailing" constant="16" id="HWu-IJ-Fq1"/>
                             <constraint firstItem="7n9-8w-e5L" firstAttribute="centerX" secondItem="iJD-FF-FKH" secondAttribute="centerX" id="UST-h0-mL8"/>
                             <constraint firstItem="Phu-jQ-FUx" firstAttribute="top" secondItem="SOh-rl-UAa" secondAttribute="bottom" constant="8" id="fkd-Va-PQV"/>
+                            <constraint firstItem="gcv-tx-97b" firstAttribute="top" secondItem="SOh-rl-UAa" secondAttribute="bottom" constant="2" id="grh-uV-xe5"/>
                             <constraint firstItem="oPO-N3-4b5" firstAttribute="top" secondItem="fnU-df-QPN" secondAttribute="bottom" constant="8" id="jsU-s8-lC2"/>
                             <constraint firstItem="fnU-df-QPN" firstAttribute="top" secondItem="7n9-8w-e5L" secondAttribute="bottom" constant="41" id="kYw-6Z-wgS"/>
                             <constraint firstItem="mXj-I5-ENp" firstAttribute="top" secondItem="iJD-FF-FKH" secondAttribute="topMargin" id="pAY-fM-B1m"/>
+                            <constraint firstItem="gcv-tx-97b" firstAttribute="leading" secondItem="Phu-jQ-FUx" secondAttribute="trailing" constant="41" id="qUQ-5g-axm"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="blanksOfAnswer" destination="fnU-df-QPN" id="Iay-hI-DGU"/>
                         <outlet property="gameView" destination="iJD-FF-FKH" id="2cG-ur-1AO"/>
+                        <outlet property="guessesRemaining" destination="I2c-uo-Wu3" id="mDd-kp-t8v"/>
                         <outlet property="imageView" destination="7n9-8w-e5L" id="mJI-OK-dTz"/>
                         <outlet property="listOfWrongGuesses" destination="Phu-jQ-FUx" id="wVm-5k-T1b"/>
                         <outlet property="userGuess" destination="oPO-N3-4b5" id="hHx-w0-Ke7"/>
